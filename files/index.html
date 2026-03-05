@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartHome — Панель управления</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fa-solid fa-house-signal"></i></div>
+      <span class="logo-text">SmartHome</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span>
+        <span class="nav-label">Дашборд</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="devices">
+        <span class="nav-icon"><i class="fa-solid fa-microchip"></i></span>
+        <span class="nav-label">Устройства</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="cameras">
+        <span class="nav-icon"><i class="fa-solid fa-video"></i></span>
+        <span class="nav-label">Камеры</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="security">
+        <span class="nav-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="nav-label">Безопасность</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="energy">
+        <span class="nav-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="nav-label">Энергия</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="automation">
+        <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span>
+        <span class="nav-label">Автоматизация</span>
+        <span class="nav-glow"></span>
+      </a>
+      <a href="#" class="nav-item" data-section="settings">
+        <span class="nav-icon"><i class="fa-solid fa-gear"></i></span>
+        <span class="nav-label">Настройки</span>
+        <span class="nav-glow"></span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="home-status">
+        <div class="status-dot green"></div>
+        <span>Дом активен</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrapper">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="topbar-left">
+        <div class="page-title">Дашборд</div>
+        <div class="page-sub">Добро пожаловать домой, Александр</div>
+      </div>
+      <div class="topbar-clock" id="clock">
+        <div class="clock-time" id="clockTime">00:00</div>
+        <div class="clock-date" id="clockDate">—</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="action-btn notif-btn" id="notifBtn">
+          <i class="fa-solid fa-bell"></i>
+          <span class="badge" id="notifBadge">3</span>
+        </button>
+        <div class="avatar" title="Александр Петров">АП</div>
+      </div>
+    </header>
+
+    <!-- NOTIFICATION PANEL -->
+    <div class="notif-panel" id="notifPanel">
+      <div class="notif-header">
+        <span>Уведомления</span>
+        <button class="clear-btn" id="clearNotif">Очистить всё</button>
+      </div>
+      <div class="notif-list" id="notifList">
+        <div class="notif-item unread">
+          <div class="notif-icon orange"><i class="fa-solid fa-door-open"></i></div>
+          <div class="notif-body">
+            <div class="notif-title">Входная дверь открыта</div>
+            <div class="notif-time">2 мин назад</div>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon yellow"><i class="fa-solid fa-person-running"></i></div>
+          <div class="notif-body">
+            <div class="notif-title">Движение в гостиной</div>
+            <div class="notif-time">5 мин назад</div>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon red"><i class="fa-solid fa-video-slash"></i></div>
+          <div class="notif-body">
+            <div class="notif-title">Камера #2 офлайн</div>
+            <div class="notif-time">12 мин назад</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon blue"><i class="fa-solid fa-temperature-half"></i></div>
+          <div class="notif-body">
+            <div class="notif-title">Температура изменена: 22°C</div>
+            <div class="notif-time">30 мин назад</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon green"><i class="fa-solid fa-plug"></i></div>
+          <div class="notif-body">
+            <div class="notif-title">Новое устройство подключено</div>
+            <div class="notif-time">1 час назад</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD GRID -->
+    <main class="dashboard-grid">
+
+      <!-- QUICK STATS ROW -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-microchip"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="activeDevices">12</div>
+            <div class="stat-label">Устройств онлайн</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fa-solid fa-shield-check"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">Защищён</div>
+            <div class="stat-label">Статус охраны</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow"><i class="fa-solid fa-bolt"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="currentPower">3.2 кВт</div>
+            <div class="stat-label">Текущий расход</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa-solid fa-temperature-half"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="outdoorTemp">+8°C</div>
+            <div class="stat-label">На улице</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIGHTING CARD -->
+      <div class="card card--lighting">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon blue"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <div class="card-title">Освещение</div>
+              <div class="card-sub">Главная спальня</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="lightToggle" checked />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+        <div class="led-indicator" id="lightLed"></div>
+        <div class="brightness-section">
+          <div class="slider-label">
+            <span>Яркость</span>
+            <span class="slider-val" id="brightnessVal">75%</span>
+          </div>
+          <input type="range" class="custom-slider" id="brightnessSlider" min="0" max="100" value="75" />
+          <div class="light-preview" id="lightPreview"></div>
+        </div>
+        <div class="room-chips">
+          <span class="chip active">Спальня</span>
+          <span class="chip">Гостиная</span>
+          <span class="chip">Кухня</span>
+          <span class="chip">Коридор</span>
+        </div>
+      </div>
+
+      <!-- THERMOSTAT CARD -->
+      <div class="card card--thermostat">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon orange"><i class="fa-solid fa-temperature-half"></i></div>
+            <div>
+              <div class="card-title">Термостат</div>
+              <div class="card-sub">Центральный</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="thermoToggle" checked />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+        <div class="thermo-display">
+          <div class="thermo-ring" id="thermoRing">
+            <svg viewBox="0 0 120 120" class="thermo-svg">
+              <circle cx="60" cy="60" r="52" class="thermo-bg-circle"/>
+              <circle cx="60" cy="60" r="52" class="thermo-progress-circle" id="thermoArc"/>
+            </svg>
+            <div class="thermo-inner">
+              <div class="thermo-temp" id="thermoDisplay">22°</div>
+              <div class="thermo-label">целевая</div>
+            </div>
+          </div>
+          <div class="thermo-controls">
+            <button class="thermo-btn" id="thermoDown"><i class="fa-solid fa-minus"></i></button>
+            <div class="thermo-current">
+              <div class="thermo-curr-val" id="thermoCurrent">20°C</div>
+              <div class="thermo-curr-label">сейчас</div>
+            </div>
+            <button class="thermo-btn" id="thermoUp"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="thermo-modes">
+          <span class="mode-chip active" data-mode="heat"><i class="fa-solid fa-fire"></i> Обогрев</span>
+          <span class="mode-chip" data-mode="cool"><i class="fa-solid fa-snowflake"></i> Охлаждение</span>
+          <span class="mode-chip" data-mode="auto"><i class="fa-solid fa-rotate"></i> Авто</span>
+        </div>
+      </div>
+
+      <!-- SECURITY CAMERAS CARD -->
+      <div class="card card--cameras">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon red"><i class="fa-solid fa-video"></i></div>
+            <div>
+              <div class="card-title">Камеры</div>
+              <div class="card-sub">3 из 4 онлайн</div>
+            </div>
+          </div>
+          <span class="status-badge red">1 офлайн</span>
+        </div>
+        <div class="cameras-grid">
+          <div class="camera-thumb active">
+            <div class="cam-preview">
+              <div class="cam-scanline"></div>
+              <div class="cam-crosshair"></div>
+              <span class="cam-label">Вход</span>
+            </div>
+            <div class="cam-info">
+              <span class="cam-dot green"></span>
+              <span>Онлайн</span>
+            </div>
+            <button class="cam-btn">Открыть</button>
+          </div>
+          <div class="camera-thumb active">
+            <div class="cam-preview">
+              <div class="cam-scanline"></div>
+              <div class="cam-crosshair"></div>
+              <span class="cam-label">Гараж</span>
+            </div>
+            <div class="cam-info">
+              <span class="cam-dot green"></span>
+              <span>Онлайн</span>
+            </div>
+            <button class="cam-btn">Открыть</button>
+          </div>
+          <div class="camera-thumb offline">
+            <div class="cam-preview offline-screen">
+              <i class="fa-solid fa-video-slash"></i>
+              <span class="cam-label">Двор</span>
+            </div>
+            <div class="cam-info">
+              <span class="cam-dot red"></span>
+              <span>Офлайн</span>
+            </div>
+            <button class="cam-btn disabled">Нет сигнала</button>
+          </div>
+          <div class="camera-thumb active">
+            <div class="cam-preview">
+              <div class="cam-scanline"></div>
+              <div class="cam-crosshair"></div>
+              <span class="cam-label">Детская</span>
+            </div>
+            <div class="cam-info">
+              <span class="cam-dot green"></span>
+              <span>Онлайн</span>
+            </div>
+            <button class="cam-btn">Открыть</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOOR LOCK CARD -->
+      <div class="card card--lock">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon green"><i class="fa-solid fa-lock"></i></div>
+            <div>
+              <div class="card-title">Замки</div>
+              <div class="card-sub">Контроль доступа</div>
+            </div>
+          </div>
+        </div>
+        <div class="locks-list">
+          <div class="lock-item" id="lock1">
+            <div class="lock-info">
+              <i class="fa-solid fa-door-closed lock-icon"></i>
+              <div>
+                <div class="lock-name">Входная дверь</div>
+                <div class="lock-status locked" id="lock1Status">Закрыта</div>
+              </div>
+            </div>
+            <button class="lock-toggle-btn locked" id="lock1Btn" onclick="toggleLock('lock1')">
+              <i class="fa-solid fa-lock"></i>
+            </button>
+          </div>
+          <div class="lock-item" id="lock2">
+            <div class="lock-info">
+              <i class="fa-solid fa-warehouse lock-icon"></i>
+              <div>
+                <div class="lock-name">Гараж</div>
+                <div class="lock-status unlocked" id="lock2Status">Открыт</div>
+              </div>
+            </div>
+            <button class="lock-toggle-btn unlocked" id="lock2Btn" onclick="toggleLock('lock2')">
+              <i class="fa-solid fa-lock-open"></i>
+            </button>
+          </div>
+          <div class="lock-item" id="lock3">
+            <div class="lock-info">
+              <i class="fa-solid fa-door-closed lock-icon"></i>
+              <div>
+                <div class="lock-name">Задняя дверь</div>
+                <div class="lock-status locked" id="lock3Status">Закрыта</div>
+              </div>
+            </div>
+            <button class="lock-toggle-btn locked" id="lock3Btn" onclick="toggleLock('lock3')">
+              <i class="fa-solid fa-lock"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMART PLUGS CARD -->
+      <div class="card card--plugs">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon purple"><i class="fa-solid fa-plug"></i></div>
+            <div>
+              <div class="card-title">Умные розетки</div>
+              <div class="card-sub">5 устройств</div>
+            </div>
+          </div>
+        </div>
+        <div class="plugs-list">
+          <div class="plug-item">
+            <div class="plug-info">
+              <i class="fa-solid fa-tv"></i>
+              <span>Телевизор</span>
+              <span class="plug-watts">85 Вт</span>
+            </div>
+            <label class="toggle-switch sm">
+              <input type="checkbox" checked onchange="updatePlugs()" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="plug-item">
+            <div class="plug-info">
+              <i class="fa-solid fa-computer"></i>
+              <span>Компьютер</span>
+              <span class="plug-watts">320 Вт</span>
+            </div>
+            <label class="toggle-switch sm">
+              <input type="checkbox" checked onchange="updatePlugs()" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="plug-item">
+            <div class="plug-info">
+              <i class="fa-solid fa-blender"></i>
+              <span>Блендер</span>
+              <span class="plug-watts">600 Вт</span>
+            </div>
+            <label class="toggle-switch sm">
+              <input type="checkbox" onchange="updatePlugs()" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="plug-item">
+            <div class="plug-info">
+              <i class="fa-solid fa-charging-station"></i>
+              <span>Зарядка авто</span>
+              <span class="plug-watts">7.4 кВт</span>
+            </div>
+            <label class="toggle-switch sm">
+              <input type="checkbox" checked onchange="updatePlugs()" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="plug-item">
+            <div class="plug-info">
+              <i class="fa-solid fa-robot"></i>
+              <span>Робот-пылесос</span>
+              <span class="plug-watts">45 Вт</span>
+            </div>
+            <label class="toggle-switch sm">
+              <input type="checkbox" onchange="updatePlugs()" />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- AIR CONDITIONING CARD -->
+      <div class="card card--ac">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon cyan"><i class="fa-solid fa-wind"></i></div>
+            <div>
+              <div class="card-title">Кондиционер</div>
+              <div class="card-sub">Гостиная</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="acToggle" />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+        <div class="ac-body">
+          <div class="ac-temp-display">
+            <div class="ac-temp-val" id="acTemp">18°C</div>
+            <div class="ac-temp-sub">целевая температура</div>
+          </div>
+          <div class="ac-controls">
+            <button class="ac-temp-btn" onclick="adjustAcTemp(-1)"><i class="fa-solid fa-minus"></i></button>
+            <button class="ac-temp-btn" onclick="adjustAcTemp(1)"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="ac-modes">
+          <span class="ac-mode active" data-mode="cool"><i class="fa-solid fa-snowflake"></i></span>
+          <span class="ac-mode" data-mode="heat"><i class="fa-solid fa-fire"></i></span>
+          <span class="ac-mode" data-mode="fan"><i class="fa-solid fa-fan"></i></span>
+          <span class="ac-mode" data-mode="dry"><i class="fa-solid fa-droplet-slash"></i></span>
+        </div>
+        <div class="fan-section">
+          <div class="slider-label">
+            <span>Скорость вентилятора</span>
+            <span class="slider-val" id="fanVal">60%</span>
+          </div>
+          <input type="range" class="custom-slider cyan" id="fanSlider" min="0" max="100" value="60" />
+        </div>
+      </div>
+
+      <!-- MOTION SENSORS CARD -->
+      <div class="card card--motion">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon yellow"><i class="fa-solid fa-person-walking"></i></div>
+            <div>
+              <div class="card-title">Датчики движения</div>
+              <div class="card-sub">6 зон</div>
+            </div>
+          </div>
+        </div>
+        <div class="motion-zones">
+          <div class="motion-zone active" id="mz1">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person-running"></i>
+            <span>Гостиная</span>
+            <span class="zone-status">Активно</span>
+          </div>
+          <div class="motion-zone" id="mz2">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person"></i>
+            <span>Коридор</span>
+            <span class="zone-status">Тихо</span>
+          </div>
+          <div class="motion-zone" id="mz3">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person"></i>
+            <span>Кухня</span>
+            <span class="zone-status">Тихо</span>
+          </div>
+          <div class="motion-zone active" id="mz4">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person-running"></i>
+            <span>Вход</span>
+            <span class="zone-status">Активно</span>
+          </div>
+          <div class="motion-zone" id="mz5">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person"></i>
+            <span>Спальня</span>
+            <span class="zone-status">Тихо</span>
+          </div>
+          <div class="motion-zone" id="mz6">
+            <div class="zone-pulse"></div>
+            <i class="fa-solid fa-person"></i>
+            <span>Двор</span>
+            <span class="zone-status">Тихо</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENERGY ANALYTICS CARD -->
+      <div class="card card--energy">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon yellow"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <div class="card-title">Потребление энергии</div>
+              <div class="card-sub">Аналитика</div>
+            </div>
+          </div>
+          <div class="energy-period-tabs">
+            <button class="period-tab active" data-period="day">День</button>
+            <button class="period-tab" data-period="week">Неделя</button>
+          </div>
+        </div>
+
+        <div class="energy-stats">
+          <div class="energy-stat">
+            <div class="energy-stat-val" id="dailyKwh">18.4</div>
+            <div class="energy-stat-label">кВт·ч сегодня</div>
+          </div>
+          <div class="energy-stat">
+            <div class="energy-stat-val green" id="weeklyKwh">112</div>
+            <div class="energy-stat-label">кВт·ч за неделю</div>
+          </div>
+          <div class="energy-stat">
+            <div class="energy-stat-val yellow" id="energyCost">94 ₽</div>
+            <div class="energy-stat-label">стоимость/день</div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="energyChart"></canvas>
+          <div class="chart-labels" id="chartLabels"></div>
+        </div>
+
+        <div class="energy-breakdown">
+          <div class="breakdown-item">
+            <div class="breakdown-dot blue"></div>
+            <span>Отопление</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:42%; background:var(--accent)"></div></div>
+            <span class="breakdown-pct">42%</span>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-dot green"></div>
+            <span>Освещение</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:18%; background:var(--secondary)"></div></div>
+            <span class="breakdown-pct">18%</span>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-dot yellow"></div>
+            <span>Бытовые</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:28%; background:var(--warning)"></div></div>
+            <span class="breakdown-pct">28%</span>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-dot red"></div>
+            <span>Прочее</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:12%; background:var(--danger)"></div></div>
+            <span class="breakdown-pct">12%</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
